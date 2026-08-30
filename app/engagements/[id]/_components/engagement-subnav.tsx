@@ -13,8 +13,8 @@ const TABS = [
   { segment: "adr", label: "ADR" },
   { segment: "examination", label: "Examination" },
   { segment: "report", label: "Report" },
-  { segment: "findings", label: "Findings" },
   { segment: "remediation", label: "Remediation" },
+  { segment: "history", label: "History" },
 ] as const;
 
 export function EngagementSubnav({ engagementId }: { engagementId: string }) {
@@ -25,6 +25,13 @@ export function EngagementSubnav({ engagementId }: { engagementId: string }) {
   function isActive(segment: string) {
     if (!segment) {
       return pathname === base || pathname === `${base}/`;
+    }
+    if (segment === "report") {
+      return (
+        pathname === `${base}/report` ||
+        pathname.startsWith(`${base}/report/`) ||
+        pathname.startsWith(`${base}/findings/`)
+      );
     }
     return (
       pathname === `${base}/${segment}` ||

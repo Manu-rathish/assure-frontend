@@ -50,7 +50,10 @@ export function OverviewView({ overview }: OverviewViewProps) {
 
           <SectionItem className="grid min-w-0 gap-6 lg:grid-cols-2">
             <OverviewSlaBand slaHealth={overview.slaHealth} />
-            <OverviewActivityFeed activity={overview.recentActivity} />
+            <OverviewActivityFeed
+              engagementId={overview.id}
+              activity={overview.recentActivity}
+            />
           </SectionItem>
 
           {hasScopeDrawer(overview) ? (

@@ -1,8 +1,8 @@
 import {
+  ClipboardCheck,
   ClipboardList,
   Home,
   Inbox,
-  Settings,
   type LucideIcon,
 } from "lucide-react";
 
@@ -16,7 +16,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: Home },
   { href: "/engagements", label: "Engagements", icon: ClipboardList },
   { href: "/inbox", label: "Inbox", icon: Inbox },
-  { href: "/admin", label: "Admin", icon: Settings },
+  { href: "/remediation", label: "Remediation", icon: ClipboardCheck },
 ];
 
 export function isNavItemActive(pathname: string, href: string): boolean {

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Card } from "@/components/ui/card";
@@ -8,10 +9,14 @@ import type { EngagementActivity } from "@/lib/types/engagement";
 import { formatDate } from "./overview-helpers";
 
 interface OverviewActivityFeedProps {
+  engagementId: string;
   activity: EngagementActivity[];
 }
 
-export function OverviewActivityFeed({ activity }: OverviewActivityFeedProps) {
+export function OverviewActivityFeed({
+  engagementId,
+  activity,
+}: OverviewActivityFeedProps) {
   const reduce = useReducedMotion();
   const enteredRef = useRef(false);
   const items = activity.slice(0, 10);
@@ -55,6 +60,17 @@ export function OverviewActivityFeed({ activity }: OverviewActivityFeedProps) {
           ))}
         </motion.ul>
       )}
+
+      {items.length > 0 ? (
+        <div className="border-t border-border/40 px-4 py-3 sm:px-6">
+          <Link
+            href={`/engagements/${engagementId}/history`}
+            className="text-xs text-primary hover:underline"
+          >
+            View full history
+          </Link>
+        </div>
+      ) : null}
     </Card>
   );
 }

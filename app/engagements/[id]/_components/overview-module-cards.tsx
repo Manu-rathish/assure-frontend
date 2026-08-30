@@ -76,7 +76,7 @@ export function OverviewModuleCards({
     },
     {
       title: "Findings",
-      href: `${base}/findings`,
+      href: `${base}/report#findings-register`,
       ariaLabel: `Findings, ${kpis.findingsTotal} recorded`,
       primary: String(kpis.findingsTotal),
       secondary:

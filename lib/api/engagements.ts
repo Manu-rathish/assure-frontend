@@ -3,6 +3,7 @@ import { ApiClientError } from "@/lib/api/types";
 import type { Page } from "@/lib/api/types";
 import type {
   EngagementActivity,
+  EngagementHistory,
   EngagementKpis,
   EngagementListItem,
   EngagementOverview,
@@ -116,4 +117,21 @@ export async function getEngagementOverviewApi(
     phase: detail.phase,
     leadName: detail.leadName,
   };
+}
+
+export async function getEngagementHistoryApi(
+  engagementId: string,
+): Promise<EngagementHistory> {
+  const engagement = requireEngagement(engagementId);
+  const raw = engagement.history;
+
+  if (!raw) {
+    throw new ApiClientError(
+      `Engagement history not found: ${engagementId}`,
+      404,
+      "ENGAGEMENT_HISTORY_NOT_FOUND",
+    );
+  }
+
+  return raw as EngagementHistory;
 }

@@ -33,7 +33,7 @@
 | **UI only** | No HTTP endpoints, DB schema, server actions, or phase-update mutations. |
 | **Read-only data** | Single load: `getEngagementDetailApi(engagementId)` → `EngagementOverview`. Optional read-only: `getEngagementHistoryApi` (§10 stretch only). |
 | **No `/history` route** | Recent activity lives on overview. Do not add a History subnav tab. |
-| **Findings is separate** | Link to `/engagements/{id}/findings`, not only `/report`. |
+| **Findings on report** | Link to `/engagements/{id}/report#findings-register` — full register lives on Report tab. |
 | **No charts** | No SVG donut, no Recharts on overview. Use stat strips and `scaleX` bars only. |
 | **Engagement name = H1** | Unlike ADR (module name as H1), overview uses **engagement name** as page title. |
 | **Display-only phase rail** | Users cannot click to change phase. |
@@ -52,7 +52,8 @@
 /engagements/{engagementId}/adr/lines/{lineId}
 /engagements/{engagementId}/examination
 /engagements/{engagementId}/report
-/engagements/{engagementId}/findings
+/engagements/{engagementId}/findings              → redirect to /report#findings-register
+/engagements/{engagementId}/findings/{findingCode}
 /engagements/{engagementId}/remediation
 ```
 
@@ -79,11 +80,11 @@ On **all** `/engagements/[id]/*` routes. Overview content renders **below** subn
 | `adr` | ADR | `/engagements/{id}/adr` |
 | `examination` | Examination | `/engagements/{id}/examination` |
 | `report` | Report | `/engagements/{id}/report` |
-| `findings` | Findings | `/engagements/{id}/findings` |
 | `remediation` | Remediation | `/engagements/{id}/remediation` |
 
 **Active detection:**
 - Overview: pathname is `/engagements/{id}` or `/engagements/{id}/`
+- Report: also active for `/engagements/{id}/findings/{findingCode}` (detail route)
 - Else: exact match or `pathname.startsWith(/engagements/{id}/{segment}/)`
 
 **Tab link:** `relative flex items-center rounded-md px-3 py-1.5 text-xs font-medium`  
@@ -431,7 +432,7 @@ Grid: `grid gap-4 sm:grid-cols-2 lg:grid-cols-3`. Each card is `<Link href={...}
 | 1 | IDR | `/engagements/{id}/idr` | `{idrOpen}` as large number, label "open" | `{idrOpen} open · {idrTotal} total` where `idrTotal = idrOpen+idrClosed` |
 | 2 | ADR | `/engagements/{id}/adr` | `{adrOpen}` open | `{adrOpen} open · {adrTotal} total` |
 | 3 | Examination | `.../examination` | `{asksTotal}` | `Examination asks` (static) |
-| 4 | Findings | `.../findings` | `{findingsTotal}` | If critical/high > 0: `{critical} critical · {high} high`; else `Findings recorded` |
+| 4 | Findings | `.../report#findings-register` | `{findingsTotal}` | If critical/high > 0: `{critical} critical · {high} high`; else `Findings recorded` |
 | 5 | Remediation | `.../remediation` | `{actionItemsOpen}` | `{actionItemsOpen} open · {actionItemsTotal} total` |
 | 6 | SLA risk | `#sla-band` or `button` scroll | `{dueWithin48h}` due ≤48h | `{overdue} overdue` — if overdue > 0 add `ring-destructive/30` on card |
 

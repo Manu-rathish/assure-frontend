@@ -1,12 +1,22 @@
-import { pageShellClass } from "@/components/app-shell/page-shell";
+import { Suspense } from "react";
+import { InboxView } from "@/app/inbox/_components/inbox-view";
+import {
+  buildInboxPageData,
+  parseInboxSearchParams,
+} from "@/app/inbox/_components/inbox-helpers";
+import { getInboxApi } from "@/lib/api/inbox";
 
-export default function InboxPage() {
+export default async function InboxPage({
+  searchParams,
+}: PageProps<"/inbox">) {
+  const rawParams = await searchParams;
+  const params = parseInboxSearchParams(rawParams);
+  const raw = await getInboxApi();
+  const data = buildInboxPageData(raw, params);
+
   return (
-    <main className={pageShellClass}>
-      <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Inbox</h1>
-      <p className="text-muted-foreground">
-        Your assigned lines and approvals — coming soon.
-      </p>
-    </main>
+    <Suspense>
+      <InboxView data={data} params={params} />
+    </Suspense>
   );
 }
