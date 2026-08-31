@@ -53,7 +53,7 @@ export function RemediationStatusActions({
               disabled
               title="Coming soon"
             >
-              {formatActionItemStatus(next)}
+              Mark {formatActionItemStatus(next)}
             </Button>
           ))}
         </div>

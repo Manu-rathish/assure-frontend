@@ -1,9 +1,10 @@
-import { paginate, requireEngagement } from "@/lib/data/dummy";
+import { loadDummy, paginate, requireEngagement } from "@/lib/data/dummy";
 import { ApiClientError } from "@/lib/api/types";
 import type { Page } from "@/lib/api/types";
 import type {
   ActionItemDetail,
   ActionItemListItem,
+  RemediationRegister,
 } from "@/lib/types/remediation";
 
 export interface ListActionItemsParams {
@@ -76,4 +77,9 @@ export async function getActionItemDetailApi(
   }
 
   return mapActionItem(detail as unknown as Record<string, unknown>);
+}
+
+export async function getRemediationRegisterApi(): Promise<RemediationRegister> {
+  const data = loadDummy();
+  return data.views.remediationRegister as RemediationRegister;
 }

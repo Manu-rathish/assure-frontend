@@ -162,7 +162,7 @@ export function RemediationItemsTable({
                   <TableCell className="font-mono text-xs">
                     {item.findingCode ? (
                       <Link
-                        href={`/engagements/${engagementId}/remediation/findings/${item.findingCode}`}
+                        href={`/engagements/${engagementId}/findings/${item.findingCode}`}
                         className="text-primary hover:underline"
                         onClick={(e) => e.stopPropagation()}
                       >

@@ -14,6 +14,7 @@ import { PageReveal, SectionItem, SectionStagger } from "@/lib/motion";
 import type { ActionItemDetail } from "@/lib/types/remediation";
 import {
   formatDate,
+  formatDateTime,
   slaLabel,
 } from "@/app/engagements/[id]/remediation/_components/remediation-helpers";
 import {
@@ -56,7 +57,7 @@ export function RemediationItemDetailView({
               <p className="font-mono text-xs text-muted-foreground">
                 {item.actionItemId}
               </p>
-              <h1 className="text-xl font-semibold leading-tight tracking-tight">
+              <h1 className="text-2xl font-semibold leading-tight tracking-tight">
                 {item.title}
               </h1>
               <div className="flex flex-wrap items-center gap-2">
@@ -120,7 +121,7 @@ export function RemediationItemDetailView({
                   <div>
                     <p className="text-xs text-muted-foreground">Target date</p>
                     <p className="font-mono text-xs tabular-nums">
-                      {formatDate(item.dueDate)}
+                      {formatDateTime(item.dueDate)}
                     </p>
                   </div>
                   <div>

@@ -20,6 +20,11 @@
   --input: oklch(0.76 0.02 98.35);
   --ring: oklch(0.62 0.14 39.04);
   --radius: 0.625rem;
+  --sla-ok: oklch(0.65 0.15 145);
+  --sla-warn: oklch(0.75 0.15 75);
+  --sla-breach: oklch(0.55 0.22 25.33);
+  --sla-complete: oklch(0.62 0.14 160);
+  --chart-1: oklch(0.62 0.14 39.04);
 }
 
 .dark {
@@ -41,6 +46,11 @@
   --border: oklch(0.36 0.01 106.89);
   --input: oklch(0.43 0.01 100.22);
   --ring: oklch(0.67 0.13 38.76);
+  --sla-ok: oklch(0.68 0.14 145);
+  --sla-warn: oklch(0.78 0.14 75);
+  --sla-breach: oklch(0.64 0.21 25.33);
+  --sla-complete: oklch(0.65 0.13 160);
+  --chart-1: oklch(0.67 0.13 38.76);
 }
 
 @theme inline {
@@ -62,6 +72,11 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-sla-ok: var(--sla-ok);
+  --color-sla-warn: var(--sla-warn);
+  --color-sla-breach: var(--sla-breach);
+  --color-sla-complete: var(--sla-complete);
+  --color-chart-1: var(--chart-1);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -100,4 +115,19 @@ body {
 
 .animate-shimmer {
   animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.dashboard-bar-grow {
+  transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.dashboard-ring-segment {
+  transition: stroke-dasharray 450ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-bar-grow,
+  .dashboard-ring-segment {
+    transition: none;
+  }
 }

@@ -6,7 +6,7 @@ import {
 
 export function ActionItemStatusBadge({ status }: { status: string }) {
   return (
-    <span className="inline-flex h-5 items-center gap-1.5 rounded-sm bg-muted/60 px-1.5 text-[0.625rem] font-medium">
+    <span className="inline-flex items-center gap-1.5 rounded-md bg-muted/60 px-2 py-0.5 text-xs font-medium">
       <span
         className={cn("size-1.5 shrink-0 rounded-full", statusDotClass(status))}
         aria-hidden

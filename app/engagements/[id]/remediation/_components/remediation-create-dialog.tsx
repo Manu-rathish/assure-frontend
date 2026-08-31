@@ -116,7 +116,7 @@ export function RemediationCreateDialog({
                   id="ai-id"
                   value={actionItemId}
                   onChange={(e) => setActionItemId(e.target.value)}
-                  placeholder="AI-011"
+                  placeholder="AI-004"
                   className={cn("font-mono", controlFocusClass)}
                 />
                 {errors.actionItemId ? (
@@ -143,6 +143,7 @@ export function RemediationCreateDialog({
                 id="ai-title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                placeholder="Describe the remediation action…"
                 className={controlFocusClass}
               />
               {errors.title ? (
@@ -156,7 +157,7 @@ export function RemediationCreateDialog({
               </Label>
               <Select value={teamSlug} onValueChange={setTeamSlug}>
                 <SelectTrigger id="ai-team" className={controlFocusClass}>
-                  <SelectValue placeholder="Select team" />
+                  <SelectValue placeholder="Select team…" />
                 </SelectTrigger>
                 <SelectContent>
                   {teams.map((team) => (
@@ -172,18 +173,19 @@ export function RemediationCreateDialog({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="ai-description">Description</Label>
+              <Label htmlFor="ai-description">Details</Label>
               <Textarea
                 id="ai-description"
                 rows={3}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                placeholder="Change request, dependencies, evidence notes…"
                 className={controlFocusClass}
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="ai-due">Due date</Label>
+              <Label htmlFor="ai-due">Target date</Label>
               <Input
                 id="ai-due"
                 type="date"
@@ -203,7 +205,7 @@ export function RemediationCreateDialog({
             <Button type="button" variant="outline" onClick={() => handleOpenChange(false)}>
               Cancel
             </Button>
-            <Button type="submit">Add action item</Button>
+            <Button type="submit">Create action item</Button>
           </DialogFooter>
         </form>
       </DialogContent>

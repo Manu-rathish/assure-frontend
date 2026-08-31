@@ -24,3 +24,45 @@ export interface ActionItemListItem {
 }
 
 export type ActionItemDetail = ActionItemListItem;
+
+export interface RemediationRegisterSummary {
+  openCount: number;
+  overdueCount: number;
+  verifiedCount: number;
+  total: number;
+}
+
+export interface RemediationRegisterEngagementFilter {
+  id: string;
+  code: string;
+  name: string;
+}
+
+export interface RemediationRegister {
+  items: ActionItemListItem[];
+  summary: RemediationRegisterSummary;
+  engagementFilters: RemediationRegisterEngagementFilter[];
+}
+
+export type RegisterStatusFilter =
+  | "open_all"
+  | "overdue"
+  | "open"
+  | "in_progress"
+  | "evidence_captured"
+  | "verified"
+  | "closed";
+
+export interface RegisterSearchParams {
+  q?: string;
+  status?: RegisterStatusFilter;
+  engagementId?: string;
+}
+
+export interface RemediationRegisterPageData {
+  items: ActionItemListItem[];
+  filteredItems: ActionItemListItem[];
+  summary: RemediationRegisterSummary;
+  engagementFilters: RemediationRegisterEngagementFilter[];
+  params: RegisterSearchParams;
+}

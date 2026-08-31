@@ -44,11 +44,11 @@ const STATUS_LABELS: Record<string, string> = {
 };
 
 const STATUS_DOT: Record<string, string> = {
-  open: "bg-blue-500",
-  in_progress: "bg-primary",
-  evidence_captured: "bg-amber-500",
-  verified: "bg-emerald-500",
-  closed: "bg-slate-400",
+  open: "bg-muted-foreground",
+  in_progress: "bg-sla-warn",
+  evidence_captured: "bg-primary",
+  verified: "bg-sla-complete",
+  closed: "bg-sla-complete",
 };
 
 export function formatDate(iso: string | null) {
@@ -56,6 +56,11 @@ export function formatDate(iso: string | null) {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return "—";
   return fmt.format(d);
+}
+
+export function formatDateTime(iso: string | null) {
+  if (!iso) return "Not set";
+  return formatDate(iso);
 }
 
 export function formatActionItemStatus(status: string) {
@@ -146,9 +151,13 @@ export function planProgress(items: ActionItemListItem[]) {
 }
 
 export function progressBarTone(pct: number) {
-  if (pct >= 100) return "bg-emerald-500";
-  if (pct >= 50) return "bg-amber-500";
-  return "bg-primary";
+  if (pct >= 100) return "bg-green-500";
+  if (pct >= 50) return "bg-amber-400";
+  return "bg-blue-400";
+}
+
+export function actionItemHref(engagementId: string, actionItemId: string) {
+  return `/engagements/${engagementId}/remediation/${actionItemId}`;
 }
 
 export function matchesActionFilter(

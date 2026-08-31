@@ -46,11 +46,17 @@ export interface DummyEngagement {
 }
 
 export interface DummyData {
+  tenant: import("./dashboard").Tenant;
+  referenceDate?: string;
   teams: Team[];
   users: import("./org").User[];
   views: {
     engagementsList: EngagementListItem[];
     inbox: import("./inbox").InboxView;
+    remediationRegister: import("./remediation").RemediationRegister;
+    orgDashboard?: Partial<
+      Omit<import("./dashboard").OrgDashboard, "tenant" | "activeEngagements">
+    >;
   };
   engagements: DummyEngagement[];
 }
